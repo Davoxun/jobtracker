@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <nav>
+        <a href="{% url 'create_application' %}">Create Application</a>
+    </nav>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+        {% for application in applications %}
+        <tr>
+            <td>{{ application.company }}</td>
+            <td>{{ application.role }}</td>
+            <td>{{ application.status }}</td>
+            <td><a href ="{% url 'edit_application' application.id %}">Edit</a></td>
+            <td><form method="post" action="{% url 'delete_application' application.id %}">{% csrf_token %}<button type="submit">Delete</button></form></td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    
+</body>
+</html>
